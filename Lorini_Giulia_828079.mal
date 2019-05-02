@@ -1,6 +1,6 @@
-// note that this is nearly identical to the example
-// given in Tanenbaum.  Note:
-// 
+//My code is the sumdif instruction, lines 55-76
+
+
 // 1) SlashSlash-style ("//") comment characters have been added.
 //
 // 2) "nop" has been added as a pseudo-instruction to indicate that

@@ -1,0 +1,117 @@
+.constant 
+OBJREF 0x10
+.end-constant
+
+.main
+
+start:	LDC_W OBJREF
+	BIPUSH 5
+	BIPUSH 5
+	BIPUSH 10
+	SUMDIF
+	INVOKEVIRTUAL STAMPA
+	POP		//elimino valore di ritorno di invokevirtual
+
+	LDC_W OBJREF
+	BIPUSH 4
+	BIPUSH 2
+	BIPUSH 4
+	SUMDIF
+	INVOKEVIRTUAL STAMPA
+	POP
+
+	LDC_W OBJREF
+	BIPUSH 20
+	BIPUSH 20
+	BIPUSH 35
+	SUMDIF
+	INVOKEVIRTUAL STAMPA
+	POP
+
+	LDC_W OBJREF
+	BIPUSH 7
+	BIPUSH 6
+	BIPUSH 5
+	SUMDIF
+	INVOKEVIRTUAL STAMPA
+	POP
+
+	LDC_W OBJREF
+	BIPUSH 17
+	BIPUSH 8
+	BIPUSH 8
+	SUMDIF
+	INVOKEVIRTUAL STAMPA
+	POP
+
+	BIPUSH 9
+	BIPUSH 2
+	BIPUSH 3
+	LDC_W OBJREF
+	BIPUSH 71
+	BIPUSH 10
+	BIPUSH 3
+	SUMDIF
+	INVOKEVIRTUAL STAMPA
+	POP
+	//verifico di non aver modificato il resto della pila
+	BIPUSH 48
+	IADD
+	OUT
+	BIPUSH 48
+	IADD
+	OUT
+	BIPUSH 48
+	IADD
+	OUT
+
+	HALT
+
+
+.end-main
+
+
+.method STAMPA (n)
+
+.var
+	count
+.end-var
+
+	ILOAD n
+
+	//verifico se il numero in cima alla pila ha una sola cifra
+	DUP	//per non perdere il numero con la sottrazione
+	BIPUSH 10
+	ISUB
+	IFLT unità	//ha successo se il numero era <10
+	GOTO 2cifre
+		
+unità:	BIPUSH 48
+	IADD
+	OUT		//stampa unità
+	BIPUSH 0x20	//spazio
+	OUT
+	GOTO fine
+
+2cifre:	BIPUSH 49
+	ISTORE count	//conto quante volte devo sottrarre 10 per arrivare a una singola cifra, alla fine count=decine del numero, parto da 0x31 perché so già che ha almeno 1 decina
+	BIPUSH 10
+	ISUB		//so già che era >0 dal test fatto in loop1
+	GOTO loop
+
+loop:	BIPUSH 10
+	ISUB
+	DUP		//non devo perdere il numero
+	IFLT decine
+	IINC count 1
+	GOTO loop
+
+decine:	BIPUSH 10	//risommo 10
+	IADD
+	ILOAD count
+	OUT		//stampa decine
+	GOTO unità
+
+fine:	IRETURN
+
+.end-method

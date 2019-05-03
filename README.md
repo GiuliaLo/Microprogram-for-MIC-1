@@ -2,11 +2,24 @@
 Assignment for my Computer Architecture class at Politecnico di Milano.
 
 We used the [MIC-1 architecture](http://www.ontko.com/mic1/) from the book *Structured Computer Organization* by Andrew Tanenbaum.
-The assignment was to write an instruction in [Micro Assembly Language](http://www.ontko.com/mic1/mal.html) that performs the sum of the numbers that are different among the top 3 of the stack, and writes the result in place of those top 3 numbers (i.e. (44,3,1,2,2)->(44,3,3)).
+The assignment was to write an instruction in [Micro Assembly Language](http://www.ontko.com/mic1/mal.html) that performs the sum of the numbers that are different among the top 3 of the stack, and writes the result in place of those top 3 numbers (i.e. (44,3,1,2,2)->(44,3,3)). (See text of the assignment in Italian in Seconda prova 2016-2017.txt)
+The code for the instruction is in the .mal file, lines 55-76.
 
-Extra credit was awarded for writing a test program in [IJVM](http://www.ontko.com/mic1/jas.html) (Integer-JVM, subset of the JVM assembly language)
+Extra credit was awarded for writing a test program in [IJVM](http://www.ontko.com/mic1/jas.html) (Integer-JVM, subset of the JVM assembly language). This can be found in the .jas file.
 
 Instructions to download the mic1 microarchitecture simulator and run the programs at http://www.ontko.com/mic1/user_guide.html
+
+MIC-1 Architecture:
+
+<img src="https://github.com/GiuliaLo/SUMDIF-instruction-Micro-Assembly-Language/blob/master/MIC-1%20Architecture.png" width="50%" height="50%"></img>
+
+## Reflections
+This assignment was particularly challenging because it forced me to understand in depth the data path, how the registers work and the specific function of each one, and the timing of the data path cycle, especially for the write and read instructions.
+To understand how to write the code, I started from the microinstructions that were already coded in the mic1ijvm.mal file downloaded with the mic1 simulator. I retraced step by step what each register held at any given moment and what the stack looked like after every step. Then I started experimenting with the instructions I though I needed to use, like iadd and if_icmpeq, tweaking them until I thought I had the right structure for my instruction. From there it still took me a while to fix the bugs and reach the final solution.
+The TEST program was way easier to write because the IJVM language is a higher level language and because I had already completed a project for a previous assignment using that language, so I was already pretty comfortable with it. To challenge myself I learned the syntax for writing methods into the program, which I hadn't done in that previous assignment.
+
+The computer science program goals I reached with this assignment are:
+- To attain a system-level understanding of the computer
 
 
 ## Copyright notice for mic1
